@@ -45,10 +45,9 @@ class DatasetFromCSV(Dataset):
     def __getitem__(self, index):
         single_image_label = self.labels[index]
         data_as_np = np.asarray(self.data.iloc[index][1:]).reshape(self.features, self.timestep).astype(float)
-        # 将图像转换成 tensor
+
         if self.transforms is not None:
             data_as_tensor = self.transforms(data_as_np)
-            # 返回图像及其 label
         return (data_as_tensor, single_image_label)
  
     def __len__(self):
